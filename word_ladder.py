@@ -17,8 +17,8 @@ def find(word, words, seen, target, path):
     list += build(word[:i] + "." + word[i + 1:], words, seen, list)
   if len(list) == 0:
     return False
-  list = sorted([(same(w, target), w) for w in list])
-  for (match, item) in list:
+  list = sorted([(same(w, target), w) for w in list], reverse = True)   ##List now returns in reverse Does lead to gold
+  for (match, item) in list:                                            ##in 3 steps now but hide and seek still too long
     if match >= len(target) - 1:
       if match == len(target) - 1:
         path.append(item)
