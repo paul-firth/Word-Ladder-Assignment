@@ -51,10 +51,28 @@ while True:
   target = input("Enter target word:")
   break
 
+########
+##This section removes selected words from the words list by comparing the words list to a list of selected
+##Bad words, the revised list is then passed into the find function call.
+remove_words = []
+end = False
+while end == False:
+  badword = input("Please add any words you do not want used in the path, Or leave blank to continue:")
+  if badword != "":
+    remove_words.append(badword)
+  else:
+    break
+
+wordsRemoved = [i for i in words if i not in remove_words]
+##End Remove selected words section
+########
+
 count = 0
 path = [start]
 seen = {start : True}
-if find(start, words, seen, target, path):
+
+
+if find(start, wordsRemoved, seen, target, path):
   path.append(target)
   print(len(path) - 1, path)
 else:
