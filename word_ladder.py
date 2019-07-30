@@ -1,4 +1,8 @@
 import re
+
+file = ""
+filecheck = False
+
 def same(item, target):
   return len([c for (c, t) in zip(item, target) if c == t])
 
@@ -26,9 +30,17 @@ def find(word, words, seen, target, path):
       return True
     path.pop()
 
-fname = input("Enter dictionary name: ")
-file = open(fname)
+while filecheck == False:               ##Error checking for File name input
+  try:
+    fname = input("Enter dictionary name: ")
+    file = open(fname)
+    filecheck = True
+  except:
+    print("Incorrect File name")
+
 lines = file.readlines()
+
+
 while True:
   start = input("Enter start word:")
   words = []
