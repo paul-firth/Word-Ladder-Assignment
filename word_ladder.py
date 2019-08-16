@@ -12,6 +12,7 @@ def build(pattern, words, seen, list):
                     word not in list]
 
 def find(word, words, seen, target, path):
+  bad_letter = ["z"]
   list = []
   for i in range(len(word)):
     list += build(word[:i] + "." + word[i + 1:], words, seen, list)
@@ -19,6 +20,9 @@ def find(word, words, seen, target, path):
     return False
   list = sorted([(same(w, target), w) for w in list], reverse = True)   ##List now returns in reverse Does lead to gold
   for (match, item) in list:                                            ##in 3 steps now but hide and seek still too long
+    for i in bad_letter:              #removed inefficient paths that use the letter z hide and seek now in 6 steps
+      if i in item:
+        list.remove((match, item))
     if match >= len(target) - 1:
       if match == len(target) - 1:
         path.append(item)
