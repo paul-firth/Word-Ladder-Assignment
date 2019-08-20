@@ -100,10 +100,14 @@ def main():
   #########
 
   ####################
-  #Include word
+  #Include word section
+  ## I was able force the path to include a word by calling the find function twice
+  # The first time the included word is set as the target
+  # The second time the included word is the start word and the original target is the end
+  # This seems a bit hacked together and I need to find a way to convert this into a function to add unit testing
   end2 = False
   while end2 == False:
-    goodword = input("Please add any words you want included on the path:")
+    goodword = input("Please add any words you want included on the path, Or leave blank to continue:")
     if goodword != "":
       path = [start]
       seen = {start: True}
@@ -116,9 +120,11 @@ def main():
         sys.exit()
       else:
         print("No path found")
-        sys.exit()
-    else:
-      break
+        sys.exit()              ##sys.exit is used to end the program so the only list presented is the one with the
+    else:                       ##Included word path otherwise the program would continue and produce a second list
+      break                     ##without the target word. There is probably a better way to do this.
+  #End Include word section
+  ###########################
 
 
   path = [start]
