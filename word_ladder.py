@@ -1,4 +1,5 @@
 import re
+import sys
 
 
 def same(item, target):
@@ -97,6 +98,27 @@ def main():
   wordsRemoved = [i for i in words if i not in remove_words]
   ##End Remove selected words section
   #########
+
+  ####################
+  #Include word
+  end2 = False
+  while end2 == False:
+    goodword = input("Please add any words you want included on the path:")
+    if goodword != "":
+      path = [start]
+      seen = {start: True}
+
+      if find(start, wordsRemoved, seen, goodword, path):
+        path.append(goodword)
+        if find(goodword, wordsRemoved, seen, target, path):
+          path.append(target)
+        print(len(path) - 1, path)
+        sys.exit()
+      else:
+        print("No path found")
+        sys.exit()
+    else:
+      break
 
 
   path = [start]
