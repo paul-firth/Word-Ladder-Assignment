@@ -44,7 +44,7 @@ def file_checker():
   global lines
   lines = file.readlines()
 
-def start_input(start):
+def start_input(start):             # Check if the Starting word input is blank, contains letters or special characters
   if start == "" or not start.isalnum():
     return False
   if any(char.isdigit() for char in start):
@@ -52,7 +52,7 @@ def start_input(start):
   else:
     return True
 
-def target_input(target, start):
+def target_input(target, start):      # Check if the target word input is blank, contains letters or special characters and is same length as the start word
   if target == "" or not target.isalnum() or len (target)!=len(start):
     return False
   if any(char.isdigit() for char in target):
@@ -66,7 +66,7 @@ def main():
 
   while True:
     start = input("Enter start word:").replace(" ","") #Remove any spaces form input
-    while start_input(start) == False:
+    while start_input(start) == False:                  #Calls the Start input check
       print("Start word cannot be blank, contain numbers or special characters")
       start = input("Enter start word:").replace(" ", "")
 
@@ -77,7 +77,7 @@ def main():
         words.append(word)
 
     target = input("Enter target word:").replace(" ","") #Remove any spaces form input
-    while target_input(target, start) == False:
+    while target_input(target, start) == False:         #Calls the target input check
       print("Target word cannot be blank, contain numbers or special characters and must be same length as start word")
       target = input("Enter start word:").replace(" ", "")
     break
@@ -98,7 +98,7 @@ def main():
   ##End Remove selected words section
   #########
 
-  count = 0
+
   path = [start]
   seen = {start : True}
 
