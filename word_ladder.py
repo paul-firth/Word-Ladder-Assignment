@@ -35,7 +35,7 @@ def find(word, words, seen, target, path):
 def file_checker():
   filecheck = False
   while filecheck == False:  ##Error checking for File name input
-    try:
+    try:                      ##Try to open file if fail Print error and start again
       fname = input("Enter dictionary name: ")
       file = open(fname)
       filecheck = True
@@ -44,19 +44,42 @@ def file_checker():
   global lines
   lines = file.readlines()
 
+def start_input(start):
+  if start == "" or not start.isalnum():
+    return False
+  if any(char.isdigit() for char in start):
+    return False
+  else:
+    return True
+
+def target_input(target, start):
+  if target == "" or not target.isalnum() or len (target)!=len(start):
+    return False
+  if any(char.isdigit() for char in target):
+    return False
+  else:
+    return True
+
 def main():
 
-  file_checker()
-
+  file_checker()   ##Call for function to check filename exists
 
   while True:
-    start = input("Enter start word:")
+    start = input("Enter start word:").replace(" ","") #Remove any spaces form input
+    while start_input(start) == False:
+      print("Start word cannot be blank, contain numbers or special characters")
+      start = input("Enter start word:").replace(" ", "")
+
     words = []
     for line in lines:
       word = line.rstrip()
       if len(word) == len(start):
         words.append(word)
-    target = input("Enter target word:")
+
+    target = input("Enter target word:").replace(" ","") #Remove any spaces form input
+    while target_input(target, start) == False:
+      print("Target word cannot be blank, contain numbers or special characters and must be same length as start word")
+      target = input("Enter start word:").replace(" ", "")
     break
 
   #########
